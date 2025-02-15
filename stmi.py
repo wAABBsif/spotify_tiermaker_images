@@ -27,6 +27,7 @@ def create_and_save_image(trackName, imageUri, font_name, font_size, line_size):
     _, _, w, h = i_draw.multiline_textbbox((0, 0), text=finalText, font=font, align="center")
     i_draw.multiline_text(((img.width - w) / 2, (img.height - h) / 2), finalText, (0, 0, 0), font=font, align="center")
 
+    #make sure it saves along the json
     pathlib.Path("images").mkdir(parents=True, exist_ok=True) 
     img.save("images/" + str(image_count) + ".png")
 
