@@ -74,6 +74,7 @@ def handle_playlist(entry):
         create_and_save_image(name, entry.get("cover", coverArtLink), font, font_size, line_size)
         count += 1
 
+#note to self: use argument
 file = open("example.json", "r")
 file_data = json.load(file)
 
