@@ -1,0 +1,26 @@
+{
+    "font": "",
+    "fontSize": 64,
+    "lineSize": 13,
+    "entries": [
+        {
+            "type": "album",
+            "uri": "https://open.spotify.com/album/19ObsGobUuBr11M6ysFMug",
+            "discs": [
+                1
+            ],
+            "maxCount": 12
+        },
+        {
+            "type": "song",
+            "name": "Whatsername",
+            "cover": "https://m.media-amazon.com/images/I/71Z0rLIvpuL.jpg"
+        },
+        {
+            "type": "playlist",
+            "uri": "https://open.spotify.com/playlist/7IqN1h5n1J5XhJ2nMs2CtC",
+            "cover": "https://upload.wikimedia.org/wikipedia/en/1/13/Green_Day_-_American_Idiot_single_cover.jpg",
+            "maxCount": 3
+        }
+    ]
+}
