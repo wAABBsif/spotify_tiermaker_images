@@ -28,8 +28,10 @@ def create_and_save_image(trackName, imageUri, font_name, font_size, line_size):
     _, _, w, h = i_draw.multiline_textbbox((0, 0), text=finalText, font=font, align="center")
     i_draw.multiline_text(((img.width - w) / 2, (img.height - h) / 2), finalText, (255, 255, 255), font=font, align="center")
 
-    pathlib.Path("images").mkdir(parents=True, exist_ok=True) 
-    img.save("images/" + str(image_count) + ".png")
+    folderName = sys.argv[1]
+    folderName = folderName[0:len(folderName) - 5]
+    pathlib.Path(folderName).mkdir(parents=True, exist_ok=True) 
+    img.save(folderName + "/" + str(image_count) + ".png")
 
 def handle_song(entry):
     global font
