@@ -31,7 +31,7 @@ def create_and_save_image(trackName, imageUri, font_name, font_size, line_size):
     folderName = sys.argv[1]
     folderName = folderName[0:len(folderName) - 5]
     pathlib.Path(folderName).mkdir(parents=True, exist_ok=True) 
-    img.save(folderName + "/" + str(image_count) + ".png")
+    img.save(folderName + "/" + str(image_count).zfill(4) + ".png")
 
 def handle_song(entry):
     global font
