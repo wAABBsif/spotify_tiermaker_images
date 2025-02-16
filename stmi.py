@@ -19,14 +19,14 @@ def create_and_save_image(trackName, imageUri, font_name, font_size, line_size):
 
     img = Image.open(requests.get(imageUri, stream=True).raw)
     img = img.resize((512, 512))
-    img = Image.eval(img, lambda color: 128 + color/2)
+    img = Image.eval(img, lambda color: color/2)
 
     i_draw = ImageDraw.Draw(img)
     font = ImageFont.load_default(font_size)
     if font_name != "":
         font = ImageFont.truetype(font_name, font_size)
     _, _, w, h = i_draw.multiline_textbbox((0, 0), text=finalText, font=font, align="center")
-    i_draw.multiline_text(((img.width - w) / 2, (img.height - h) / 2), finalText, (0, 0, 0), font=font, align="center")
+    i_draw.multiline_text(((img.width - w) / 2, (img.height - h) / 2), finalText, (255, 255, 255), font=font, align="center")
 
     pathlib.Path("images").mkdir(parents=True, exist_ok=True) 
     img.save("images/" + str(image_count) + ".png")
