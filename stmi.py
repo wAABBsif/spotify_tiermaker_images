@@ -19,6 +19,7 @@ def create_and_save_image(trackName, imageUri, font_name, font_size, line_size):
         finalText += line + "\n"
 
     img = Image.open(requests.get(imageUri, stream=True).raw)
+    img = img.convert("RGB")
     img = img.resize((512, 512))
     img = Image.eval(img, lambda color: color/2)
 
@@ -45,7 +46,7 @@ def handle_album(entry):
     global font_size
     global line_size
     album = PublicAlbum(entry["uri"])
-    info = album.get_album_info(entry.get("maxCount", 1000))
+    info = album.get_album_info(entry.get("maxCount", 1024))
     print("Loading album \"" + info["data"]["albumUnion"]["name"] + "\"")
     coverArtLink = info["data"]["albumUnion"]["coverArt"]["sources"][0]["url"]
     for t_entry in info["data"]["albumUnion"]["tracksV2"]["items"]:
@@ -61,7 +62,7 @@ def handle_playlist(entry):
     global font_size
     global line_size
     playlist = PublicPlaylist(entry["uri"])
-    info = playlist.get_playlist_info(entry.get("maxCount", 1000))
+    info = playlist.get_playlist_info(entry.get("maxCount", 1024))
     print("Loading playlist \"" + info["data"]["playlistV2"]["name"] + "\"")
     for t_entry in info["data"]["playlistV2"]["content"]["items"]:
         coverArtLink = t_entry["itemV2"]["data"]["albumOfTrack"]["coverArt"]["sources"][0]["url"]
