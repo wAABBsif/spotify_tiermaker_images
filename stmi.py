@@ -1,3 +1,4 @@
+import math
 import sys
 import textwrap
 from spotapi import PublicAlbum, PublicPlaylist
@@ -44,38 +45,28 @@ def handle_album(entry):
     global font_size
     global line_size
     album = PublicAlbum(entry["uri"])
-    info = album.get_album_info()
+    info = album.get_album_info(entry.get("maxCount", 1000))
     print("Loading album \"" + info["data"]["albumUnion"]["name"] + "\"")
-    count = 0
     coverArtLink = info["data"]["albumUnion"]["coverArt"]["sources"][0]["url"]
     for t_entry in info["data"]["albumUnion"]["tracksV2"]["items"]:
-        if "maxCount" in entry:
-            if count >= entry["maxCount"]:
-                break
         disc_no = t_entry["track"]["discNumber"]
         if "discs" in entry:
             if disc_no not in entry["discs"]:
                 continue
         name = t_entry["track"]["name"]
         create_and_save_image(name, entry.get("cover", coverArtLink), font, font_size, line_size)
-        count += 1
 
 def handle_playlist(entry):
     global font
     global font_size
     global line_size
     playlist = PublicPlaylist(entry["uri"])
-    info = playlist.get_playlist_info()
+    info = playlist.get_playlist_info(entry.get("maxCount", 1000))
     print("Loading playlist \"" + info["data"]["playlistV2"]["name"] + "\"")
-    count = 0
     for t_entry in info["data"]["playlistV2"]["content"]["items"]:
-        if "maxCount" in entry:
-            if count >= entry["maxCount"]:
-                break
         coverArtLink = t_entry["itemV2"]["data"]["albumOfTrack"]["coverArt"]["sources"][0]["url"]
         name = t_entry["itemV2"]["data"]["name"]
         create_and_save_image(name, entry.get("cover", coverArtLink), font, font_size, line_size)
-        count += 1
 
 if len(sys.argv) < 2:
 	raise Exception("No file parameter passed")
