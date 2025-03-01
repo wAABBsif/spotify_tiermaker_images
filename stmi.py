@@ -20,7 +20,7 @@ def create_and_save_image(trackName, imageUri, font_name, font_size, line_size):
 
     img = Image.open(requests.get(imageUri, stream=True).raw)
     img = img.convert("RGB")
-    img = img.resize((512, 512))
+    img = img.resize((400, 400))
     img = Image.eval(img, lambda color: color/2)
 
     i_draw = ImageDraw.Draw(img)
@@ -33,7 +33,7 @@ def create_and_save_image(trackName, imageUri, font_name, font_size, line_size):
     folderName = sys.argv[1]
     folderName = folderName[0:len(folderName) - 5]
     pathlib.Path(folderName).mkdir(parents=True, exist_ok=True) 
-    img.save(folderName + "/" + str(image_count).zfill(4) + ".png")
+    img.save(folderName + "/" + str(image_count).zfill(4) + ".jpg", optimize=True, quality=85)
 
 def handle_song(entry):
     global font
